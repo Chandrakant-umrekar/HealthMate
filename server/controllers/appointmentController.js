@@ -14,7 +14,6 @@ export const bookAppointment = async (req, res) => {
     const discountEntry = patient.doctorDiscounts.find(
       (discount) => discount.doctorId.toString() === doctorId
     );
-    console.log(discountEntry);
 
     if (!discountEntry) {
       discountRate = 0.1;
@@ -55,7 +54,7 @@ export const getAppointments = async (req, res) => {
 
   try {
     const appointments = await appointmentModel
-      .find({ userId })
+      .find({ patientId: userId })
       .populate("doctorId");
 
     res.status(200).json({ appointments });
